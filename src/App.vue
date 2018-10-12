@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted(){
-    this.$message.error("elementui弹出框")
+    // this.$message.error("elementui弹出框")
   }
 }
 </script>

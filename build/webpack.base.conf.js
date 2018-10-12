@@ -31,6 +31,13 @@ module.exports = {
   },
   module: {
     rules: [
+        {
+            test: /\.(css|less|scss)(\?.*)?$/,
+            loader: 'style-loader!css-loader!sass-loader!less-loader!postcss-loader',
+            include:[
+                '/node_modules/element-ui/lib/theme-chalk/',
+            ]
+        },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -64,7 +71,8 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+
     ]
   },
   node: {
