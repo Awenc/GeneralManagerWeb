@@ -83,8 +83,10 @@
             this.$message.error('注册失败哦');
           }
         })
+
       },
       userLogin(){
+        this.$router.push('/adminCenter')
         if(this.username !="" && this.password != ""){
           let obj={
             'username':this.username,
