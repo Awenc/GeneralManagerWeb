@@ -85,7 +85,7 @@
 </template>
 
 <script>
-    import navData from "../config/asideNacConf"
+    import navData from "../config/json/asideNacConf"
     export default {
         name:"asideNav",
         data(){
