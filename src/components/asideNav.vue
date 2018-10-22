@@ -36,7 +36,6 @@
                                                 <el-menu-item :index="childItema.path">{{childItema.title}}</el-menu-item>
                                             </router-link>
                                         </div>
-
                                         <!-- 选项下面还有分组 -->
                                         <el-submenu  v-for="(childItema,childIndex) in item.child" :key="childItema.title" v-if="childItema.child != 0" :index="index+'-'+childIndex">
                                             <template slot="title">
@@ -49,18 +48,10 @@
                                                     </router-link>
                                                 </div>
                                             </el-menu-item-group>
-
-
                                         </el-submenu>
                                     </el-menu-item-group>
                                 </el-submenu>
                             </div>
-
-
-
-
-
-
                             <!-- disabled  不可选中 -->
                             <!--<router-link to="/navs">-->
                                 <!--<el-menu-item index="/navs">-->
