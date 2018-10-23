@@ -5,7 +5,7 @@
           "path":"",
           "child":[
             {
-              "title":"表格一",
+              "title":"自定义模板表格",
               "path":"/adminCenter/table_one",
               "child":[]
             }

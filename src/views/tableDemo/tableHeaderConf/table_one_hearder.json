@@ -1,0 +1,40 @@
+{
+  "tableTit":[
+
+    {
+      "name":"姓名",
+      "icon":"",
+      "width":"",
+      "minWidth":"100",
+      "data":"name"
+    },
+    {
+      "name":"性别",
+      "icon":"",
+      "width":"",
+      "minWidth":"50",
+      "data":"sex"
+    },
+    {
+      "name":"年龄",
+      "icon":"",
+      "width":"",
+      "minWidth":"50",
+      "data":"age"
+    },
+    {
+      "name":"地址",
+      "icon":"",
+      "width":"",
+      "minWidth":"220",
+      "data":"address"
+    },
+    {
+      "name":"日期",
+      "icon":"el-icon-time",
+      "width":"",
+      "minWidth":"180",
+      "data":"date"
+    }
+  ]
+}
