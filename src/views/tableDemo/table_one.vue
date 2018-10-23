@@ -5,10 +5,9 @@
             <!--表格标题-->
             <div class="w_table_title">自定义模板表格</div>
             <div class="addBtn">
-                <el-button icon="el-icon-circle-plus-outline" type="primary" size="small">添加行</el-button>
+                <el-button icon="el-icon-circle-plus-outline" type="primary" size="small" @click="showBox">添加行</el-button>
             </div>
         </div>
-
         <!--
             表格内容
             ref="multipleTable"  ----存储多选的数组
@@ -81,12 +80,14 @@
                 </el-button-group>
             </div>
         </div>
+        <form-box v-on:closeBox="closeBox" v-show="boxShow"></form-box>
     </div>
 </template>
 
 <script>
     import headerData from "./tableHeaderConf/table_one_hearder"
     import tableData from "../../mock/tableMock/table_one_mock"
+    import formBox from "../../components/formBox"
     export default {
         name: "table_one",
         data() {
@@ -95,6 +96,7 @@
                 tableData: [],
                 multipleSelection:[],
                 input:'', //跳转页数
+                boxShow:false,
             }
         },
         mounted(){
@@ -113,7 +115,17 @@
                 console.log("==================多选===================")
                 console.log(this.multipleSelection);
                 console.log("=========================================")
+            },
+            closeBox(){
+               this.boxShow=false;
+            },
+
+            showBox(){
+                this.boxShow=true;
             }
+        },
+        components:{
+            formBox
         }
 
     }

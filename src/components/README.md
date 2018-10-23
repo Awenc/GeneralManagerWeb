@@ -4,10 +4,13 @@
 
 ### 利用引入json文件  实现组件的复用
     import navData from "../config/json/asideNacConf"
-### 将配置文件中的导航信息 以及 跳转路由信息 渲染到界面中
+* 将配置文件中的导航信息 以及 跳转路由信息 渲染到界面中
 
 ## w_breadCrumb-面包屑导航
 
-### 根据路由的变化 面包屑自动变换
+* 根据路由的变化 面包屑自动变换
 
 ## w_header-页面顶部栏
+
+## alertFromBox 弹出层的from表单
+* 用于在界面中 弹出一个添加用户或者商品的表单
