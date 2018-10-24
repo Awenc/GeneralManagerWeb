@@ -11,45 +11,33 @@
                 <el-table-column type="expand">
                     <template slot-scope="props">
                         <el-form label-position="left" inline class="demo-table-expand">
-                            <el-form-item label="商品名称">
-                                <span>{{ props.row.name }}</span>
+                            <el-form-item v-for="(item,index) in tableDownMsg" :key="item.name"
+                                    :label="item.name">
+                                <span v-show="props.$index != nowIndexChange">{{ props.row[item.data] }}</span>
+                                <el-input v-show="props.$index == nowIndexChange"size="mini" v-model="curColData[item.data]" placeholder="请输入内容"></el-input>
                             </el-form-item>
-                            <el-form-item label="所属店铺">
-                                <span>{{ props.row.shop }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品 ID">
-                                <span>{{ props.row.id }}</span>
-                            </el-form-item>
-                            <el-form-item label="店铺 ID">
-                                <span>{{ props.row.shopId }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品分类">
-                                <span>{{ props.row.category }}</span>
-                            </el-form-item>
-                            <el-form-item label="店铺地址">
-                                <span>{{ props.row.address }}</span>
-                            </el-form-item>
-                            <el-form-item label="商品描述">
-                                <span>{{ props.row.desc }}</span>
+                            <el-form-item >
+                                <el-button v-show="props.$index != nowIndexChange"
+                                    size="mini"
+                                    type="warning"
+                                    @click="toChangeMsg(props.$index,props.row)">修改信息</el-button>
+                                <el-button v-show="props.$index == nowIndexChange"
+                                           size="mini"
+                                           type="primary"
+                                           @click="toSureChange(props.$index,props.row)">确定修改</el-button>
+                                <el-button v-show="props.$index == nowIndexChange"
+                                           size="mini"
+                                           @click="cancelChange">取消</el-button>
                             </el-form-item>
                         </el-form>
                     </template>
                 </el-table-column>
 
-                <el-table-column
-                        label="商品 ID"
-                        prop="id"
-                        min-width="100">
-                </el-table-column>
-                <el-table-column
-                        label="商品名称"
-                        prop="name"
-                        min-width="150">
-                </el-table-column>
-                <el-table-column
-                        label="描述"
-                        prop="desc"
-                        min-width="200">
+                <el-table-column  v-for="(item,index) in tableTitle" :key="item.name"
+                        :label="item.name"
+                        :prop="item.data"
+                        :min-width="item.minWidth"
+                        align="center">
                 </el-table-column>
                 <el-table-column label="操作" width="200" align="center">
                     <template slot-scope="scope">
@@ -69,44 +57,21 @@
 </template>
 
 <script>
+    import headerData from "./tableHeaderConf/table_two_header"
+    import tableData from "../../mock/tableMock/table_two_mock"
     export default {
         name: "table_two",
         data() {
             return {
-                tableData5: [{
-                    id: '12987122',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                }, {
-                    id: '12987123',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                }, {
-                    id: '12987125',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                }, {
-                    id: '12987126',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                }]
+                tableTitle:headerData.tableTit,
+                tableDownMsg:headerData.msgData,
+                tableData5: [],
+                curColData:{},
+                nowIndexChange:-1,
             }
+        },
+        mounted(){
+            this.tableData5=tableData.tableData;
         },
         methods:{
             handleEdit(index, row) {
@@ -116,8 +81,27 @@
             handleDelete(index, row) {
                 //删除行  index-哪一行  row-该行的所有信息
                 console.log(index, row);
-
             },
+            toChangeMsg(index,row){
+                console.log(index);
+                this.nowIndexChange = index;
+                // this.curColData= this.tableData5[index];
+                for(let item in this.tableData5[index]){
+                    this.curColData[item] =this.tableData5[index][item];
+                }
+            },
+            cancelChange(){
+                //取消修改
+                this.nowIndexChange=-1;
+            },
+            toSureChange(index,row){
+                //确定修改
+                console.log("==============确定修改=========");
+                console.log("------修改的原数据为："+JSON.stringify(row)+'--index:'+index);
+                console.log("------修改后的数据为："+JSON.stringify(this.curColData));
+                console.log("*******************************")
+                this.nowIndexChange=-1;
+            }
         }
     }
 </script>

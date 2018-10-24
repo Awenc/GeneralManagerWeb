@@ -67,7 +67,7 @@
         height:100%;
         .elbox{
             height:100%;
-            overflow: hidden;
+            /*overflow: hidden;*/
         }
 
         .elbox_all{

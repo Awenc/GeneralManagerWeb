@@ -85,7 +85,7 @@
 </template>
 
 <script>
-    import headerData from "./tableHeaderConf/table_one_hearder"
+    import headerData from "./tableHeaderConf/table_one_header"
     import tableData from "../../mock/tableMock/table_one_mock"
     import formBox from "../../components/alertFormBox"
     export default {
