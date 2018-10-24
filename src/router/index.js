@@ -4,7 +4,8 @@ import Router from 'vue-router'
 import loginAndRegister from '@/views/loginAndRegist'
 /**======================管理中心==================*/
 import adminCenter from '@/views/adminCenter'
-import table_one from '@/views/tableDemo/table_one'   //表格
+import table_one from '@/views/tableDemo/table_one'   //表格1
+import table_two from '@/views/tableDemo/table_two'   //表格2
 import echarts_one from '@/views/echartsDemo/echarts_one'   //图表
 Vue.use(Router)
 
@@ -18,6 +19,7 @@ export default new Router({
          redirect:"/adminCenter/table_one",
          children:[
              {path: '/adminCenter/table_one', name: 'table_one',component: table_one},
+             {path: '/adminCenter/table_two', name: 'table_two',component: table_two},
              {path: '/adminCenter/echarts_one', name: 'echarts_one',component: echarts_one},
          ]
      },

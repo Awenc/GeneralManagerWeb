@@ -8,6 +8,11 @@
               "title":"自定义模板表格",
               "path":"/adminCenter/table_one",
               "child":[]
+            },
+            {
+              "title":"自定义可下拉表格",
+              "path":"/adminCenter/table_two",
+              "child":[]
             }
           ]
        },
