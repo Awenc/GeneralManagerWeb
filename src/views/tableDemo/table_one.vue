@@ -67,8 +67,8 @@
                 3.分页
             -->
             <div class="btns">
-                <el-button type="primary" size="small">删除所选项</el-button>
-                <el-button type="danger" size="small">全部删除</el-button>
+                <el-button type="primary" size="small" @click="delCheck">删除所选项</el-button>
+                <el-button type="danger" size="small" @click="delAll">全部删除</el-button>
             </div>
             <div class="paging">
                 <el-button-group>
@@ -80,14 +80,14 @@
                 </el-button-group>
             </div>
         </div>
-        <form-box v-on:closeBox="closeBox" v-show="boxShow"></form-box>
+        <form-box v-on:closeBox="closeBox" v-show="boxShow" :titleData="tableTit" :editData="editData"></form-box>
     </div>
 </template>
 
 <script>
     import headerData from "./tableHeaderConf/table_one_hearder"
     import tableData from "../../mock/tableMock/table_one_mock"
-    import formBox from "../../components/formBox"
+    import formBox from "../../components/alertFormBox"
     export default {
         name: "table_one",
         data() {
@@ -97,6 +97,7 @@
                 multipleSelection:[],
                 input:'', //跳转页数
                 boxShow:false,
+                editData:{},
             }
         },
         mounted(){
@@ -105,10 +106,16 @@
         },
         methods: {
             handleEdit(index, row) {
+                //编辑行   index-哪一行  row-该行的所有信息
                 console.log(index, row);
+                // console.log();
+                this.editData=this.tableData[index];
+                this.boxShow=true;
             },
             handleDelete(index, row) {
+                //删除行  index-哪一行  row-该行的所有信息
                 console.log(index, row);
+
             },
             showCheck(val){
                 this.multipleSelection = val;
@@ -119,9 +126,24 @@
             closeBox(){
                this.boxShow=false;
             },
-
             showBox(){
                 this.boxShow=true;
+                this.editData="";
+            },
+            delCheck(){
+                //删除多个数据
+                console.log("===============删除的数据为=================");
+                if(this.multipleSelection.length==''){
+                    this.$message.warning('请选择删除数据');
+                }
+                console.log(this.multipleSelection);
+                console.log("--------------------------------------------")
+            },
+            delAll(){
+                //全部删除
+                console.log("===============全部删除的数据为=================");
+                console.log(this.tableData);
+                console.log("--------------------------------------------")
             }
         },
         components:{

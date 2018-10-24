@@ -3,7 +3,8 @@
         <div class="other" @click="toClose"></div>
         <el-row>
             <el-col :span="6" :offset="9" class="formBox_container">
-                <div class="form_tit">添加内容</div>
+                <div class="form_tit" v-if="isAdd">添加内容</div>
+                <div class="form_tit" v-else>编辑内容</div>
                 <el-form
                     :model="ruleForm2"
                     status-icon
@@ -13,17 +14,12 @@
                     class="demo-ruleForm"
                     size="mini"
                 >
-                    <el-form-item label="密码" prop="pass">
-                        <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="确认密码" prop="checkPass">
-                        <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="年龄" prop="age">
-                        <el-input v-model.number="ruleForm2.age"></el-input>
+                    <el-form-item   v-for="(item,index) in titleData" :key="item.name" :label="item.name" :prop="item.data">
+                        <el-input type="text" v-model="ruleForm2[item.data]" autocomplete="off">{{editData.name}}</el-input>
                     </el-form-item>
                     <div class="btns">
-                        <el-button type="primary" @click="submitForm('ruleForm2')" size="small">提交</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm2')" size="small" v-if="isAdd">确定</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm2')" size="small" v-else>修改</el-button>
                         <el-button @click="toClose" size="small">取消</el-button>
                     </div>
                 </el-form>
@@ -34,14 +30,24 @@
 
 <script>
     export default {
-        name: "formBox",
+        name: "alertFormBox",
+        props:['titleData','editData'],
         data() {
-            var checkAge = (rule, value, callback) => {
+
+            // 姓名判断
+            let checkName=(rule, value, callback)=>{
+                if (!value) {
+                    return callback(new Error('姓名不能为空'));
+                }
+            };
+            /*年龄判断*/
+            let checkAge = (rule, value, callback) => {
                 if (!value) {
                     return callback(new Error('年龄不能为空'));
                 }
                 setTimeout(() => {
-                    if (!Number.isInteger(value)) {
+                    // console.log(`value---------------${parseFloat(value)}`);
+                    if (!Number.isInteger(parseFloat(value))) {
                         callback(new Error('请输入数字值'));
                     } else {
                         if (value < 18) {
@@ -52,46 +58,28 @@
                     }
                 }, 1000);
             };
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                } else {
-                    if (this.ruleForm2.checkPass !== '') {
-                        this.$refs.ruleForm2.validateField('checkPass');
-                    }
-                    callback();
-                }
-            };
-            var validatePass2 = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm2.pass) {
-                    callback(new Error('两次输入密码不一致!'));
-                } else {
-                    callback();
-                }
-            };
             return {
+                isAdd:true,
                 ruleForm2: {
-                    pass: '',
-                    checkPass: '',
-                    age: ''
+                    age: '',
+                    name:"",
+                    sex:"",
+                    address:"",
+                    date:"",
                 },
                 rules2: {
-                    pass: [
-                        { validator: validatePass, trigger: 'blur' }
-                    ],
-                    checkPass: [
-                        { validator: validatePass2, trigger: 'blur' }
-                    ],
                     age: [
                         { validator: checkAge, trigger: 'blur' }
-                    ]
+                    ],
+                    name: [
+                        { validator: checkName, trigger: 'blur' }
+                    ],
                 }
             };
         },
         methods: {
             submitForm(formName) {
+                console.log(this.ruleForm2.name)
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         alert('submit!');
@@ -103,7 +91,26 @@
             },
             toClose(){
                 this.$emit("closeBox");
+            },
+        },
+        watch:{
+            editData(old,opr){
+                // console.log(old)/
+                if(!!old){
+                    console.log("---------------")
+                    this.isAdd=false;
+                }
+                // let cur=this.editData
+                this.ruleForm2.name=this.editData.name;
+                this.ruleForm2.age=this.editData.age;
+                this.ruleForm2.sex=this.editData.sex;
+                this.ruleForm2.address=this.editData.address;
+                this.ruleForm2.date=this.editData.date;
+                console.log(this.editData)
             }
+        },
+        updated(){
+
         }
     }
 </script>
