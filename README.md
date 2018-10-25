@@ -47,7 +47,7 @@
           ]
 ### 3.echarts
 * 安装依赖
-    
+     
         cnpm install echarts -S        
 * 引入
         

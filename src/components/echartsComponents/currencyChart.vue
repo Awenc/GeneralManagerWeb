@@ -1,11 +1,11 @@
 <template>
-    <div id="myChart" :style="{height:myHeight +'px'}"></div>
+    <div :id="chartsID" :style="{height:(myHeight || 300) +'px'}"></div>
 </template>
 
 <script>
     export default {
-        name: "linear",
-        props:['myWidth','myHeight','x_data','y_data','title'],
+        name: "currencyChart",
+        props:['myHeight','x_data','y_data','title','mysmooth','type','chartsID'],
         data () {
             return {
                 msg: 'Welcome to Your Vue.js App'
@@ -16,8 +16,9 @@
         },
         methods: {
             drawLine(){
+
                 // 基于准备好的dom，初始化echarts实例
-                let myChart = this.$echarts.init(document.getElementById('myChart'))
+                let myChart = this.$echarts.init(document.getElementById(this.chartsID))
                 // 绘制图表
                 myChart.setOption({
                     xAxis: {
@@ -33,7 +34,8 @@
                     },
                     series: [{
                         data: this.y_data,
-                        type: 'line'
+                        type: this.type || 'line',
+                        smooth: this.mysmooth  || false   //打开为曲线
                     }]
                 });
             }

@@ -46,17 +46,19 @@
             </el-row>
         </div>
         <div class="hp_center">
-            <linear
+            <linear class="hp_chart"
+                    chartsID="homePageChart"
                     myHeight="400"
                     :x_data="xData"
                     :y_data="yData"
-                    title="关键数据图表展示"></linear>
+                    title="关键数据图表展示"
+                    ></linear>
         </div>
     </div>
 </template>
 
 <script>
-    import linear from "../components/echartsComponents/linear"
+    import linear from "../components/echartsComponents/currencyChart"
     export default {
         name: "homePage",
         data(){
@@ -151,7 +153,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        #myChart{
+        .hp_chart{
             width:100%;
         }
     }
