@@ -101,11 +101,14 @@
                     this.isAdd=false;
                 }
                 // let cur=this.editData
-                this.ruleForm2.name=this.editData.name;
-                this.ruleForm2.age=this.editData.age;
-                this.ruleForm2.sex=this.editData.sex;
-                this.ruleForm2.address=this.editData.address;
-                this.ruleForm2.date=this.editData.date;
+                for(let item in this.editData){
+                    this.ruleForm2[item] = this.editData[item]
+                }
+                // this.ruleForm2.name=this.editData.name;
+                // this.ruleForm2.age=this.editData.age;
+                // this.ruleForm2.sex=this.editData.sex;
+                // this.ruleForm2.address=this.editData.address;
+                // this.ruleForm2.date=this.editData.date;
                 console.log(this.editData)
             }
         },

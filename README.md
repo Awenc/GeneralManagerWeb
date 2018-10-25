@@ -45,5 +45,15 @@
               },
           ...
           ]
+### 3.echarts
+* 安装依赖
+    
+        cnpm install echarts -S        
+* 引入
+        
+        import echarts from 'echarts'
+        
+        Vue.prototype.$echarts = echarts 
+          
     
     

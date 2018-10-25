@@ -16,7 +16,7 @@
                 breadCrumbList:[
                     {
                         title:'首页',
-                        path:"/adminCenter"
+                        path:"/adminCenter/homePage"
                     }
                 ],
                 navData:{},
@@ -32,13 +32,19 @@
         },
         methods:{
             toSetBreadCrumbList(url){
-                this.breadCrumbList=[
-                    {
-                        title:'首页',
-                        path:"/adminCenter"
-                    }
-                ],
-                console.log("gaibian")
+                if(url == '/adminCenter/homePage'){
+                    this.breadCrumbList=[
+
+                    ]
+                }else{
+                    this.breadCrumbList=[
+                        {
+                            title:'首页',
+                            path:"/adminCenter/homePage"
+                        }
+                    ]
+                }
+
                 console.log(this.navData.asideList);
                 for(let item of this.navData.asideList){
                     if(item.path == url && item.path !=''){
@@ -51,10 +57,16 @@
                         for(let i of item.child){
                             console.log("22222");
                             if(i.path == url){
+                                //添加上一级父元素
+                                this.breadCrumbList.push({
+                                    title:item.title,
+                                    path:i.path,
+                                });
+                                //添加当前
                                 this.breadCrumbList.push({
                                     title:i.title,
                                     path:i.path,
-                                })
+                                });
                             }
                         }
                     }

@@ -1,8 +1,15 @@
 {
    "asideList":[
        {
+         "title":"首页",
+         "path":"/adminCenter/homePage",
+         "icon":"el-icon-setting",
+         "child":[]
+       },
+       {
           "title":"表格",
           "path":"",
+          "icon":"el-icon-menu",
           "child":[
             {
               "title":"自定义模板表格",
@@ -19,16 +26,19 @@
        {
          "title":"图表",
          "path":"/adminCenter/echarts_one",
+         "icon":"el-icon-picture-outline",
          "child":[]
        },
        {
          "title":"导航三",
          "path":"",
+         "icon":"el-icon-picture-outline",
          "child":[]
        },
        {
          "title":"导航四",
          "path":"",
+         "icon":"el-icon-picture-outline",
          "child":[
            {
              "title":"4-1子菜单",

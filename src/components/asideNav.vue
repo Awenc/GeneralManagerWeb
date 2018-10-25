@@ -18,14 +18,14 @@
                             <div v-for="(item,index) in dataList" :key="item.title">
                                 <router-link :to="item.path"  v-if="item.child.length == 0">
                                     <el-menu-item :index="item.path">
-                                        <i class="el-icon-menu"></i>
+                                        <i :class="item.icon"></i>
                                         <span slot="title">{{item.title}}</span>
                                     </el-menu-item>
                                 </router-link>
 
                                 <el-submenu :index="index+''" v-if="item.child.length != 0">
                                     <template slot="title">
-                                        <i class="el-icon-setting"></i>
+                                        <i :class="item.icon"></i>
                                         <span>{{item.title}}</span>
                                     </template>
                                     <!-- 导航下拉选项 -->
