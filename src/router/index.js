@@ -17,6 +17,5 @@ export default new Router({
              {path: '/adminCenter/echarts_one', name: 'echarts_one',component: r => require.ensure([], () => r(require('../views/echartsDemo/echarts_one')), 'echarts_one')},
          ]
      },
-
   ]
 })
