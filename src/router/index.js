@@ -1,28 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-/**======================登录与注册==================*/
-import loginAndRegister from '@/views/loginAndRegist'
-/**======================管理中心==================*/
-import adminCenter from '@/views/adminCenter'
-import homePage from '@/views/homePage'     //首页
-import table_one from '@/views/tableDemo/table_one'   //表格1
-import table_two from '@/views/tableDemo/table_two'   //表格2
-import echarts_one from '@/views/echartsDemo/echarts_one'   //图表
 Vue.use(Router)
 
 export default new Router({
   routes: [
-     {path: '/', name: 'loginAndRegister',component: loginAndRegister},
+     {path: '/', name: 'loginAndRegister',component:  r => require.ensure([], () => r(require('../views/loginAndRegist')), 'loginAndRegist')},
      {
          path: '/adminCenter',
          name: 'adminCenter',
-         component: adminCenter,
+         component:   r => require.ensure([], () => r(require('../views/adminCenter')), 'adminCenter'),
          redirect:"/adminCenter/homePage",
          children:[
-             {path: '/adminCenter/homePage', name: 'homePage',component: homePage},
-             {path: '/adminCenter/table_one', name: 'table_one',component: table_one},
-             {path: '/adminCenter/table_two', name: 'table_two',component: table_two},
-             {path: '/adminCenter/echarts_one', name: 'echarts_one',component: echarts_one},
+             {path: '/adminCenter/homePage', name: 'homePage',component:  r => require.ensure([], () => r(require('../views/homePage')), 'homePage')},
+             {path: '/adminCenter/table_one', name: 'table_one',component: r => require.ensure([], () => r(require('../views/tableDemo/table_one')), 'table_one')},
+             {path: '/adminCenter/table_two', name: 'table_two',component: r => require.ensure([], () => r(require('../views/tableDemo/table_two')), 'table_two')},
+             {path: '/adminCenter/echarts_one', name: 'echarts_one',component: r => require.ensure([], () => r(require('../views/echartsDemo/echarts_one')), 'echarts_one')},
          ]
      },
 
